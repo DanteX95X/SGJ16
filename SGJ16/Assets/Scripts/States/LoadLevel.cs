@@ -12,7 +12,10 @@ namespace Assets.Scripts.States
         int mapHeight;
 
         [SerializeField]
-        GameObject field;
+        GameObject field = null;
+
+        [SerializeField]
+        GameObject player = null;
         
 
         public override void Init()
@@ -22,12 +25,15 @@ namespace Assets.Scripts.States
 
             GameObject grid = new GameObject("grid");
 
+            GameObject newPlayer = Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity) as GameObject;
+            newPlayer.AddComponent<Player>();
+
             for(int i = 0; i < mapWidth; ++i)
             {
                 for(int j = 0; j < mapHeight; ++j)
                 {
-                    GameObject currentField = Instantiate(field, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    currentField.transform.parent = grid.transform;
+                    GameObject newField = Instantiate(field, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
+                    newField.transform.parent = grid.transform;
                 }
             }
 

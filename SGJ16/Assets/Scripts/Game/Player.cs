@@ -9,8 +9,6 @@ namespace Assets.Scripts.Game
         Movable playerMovable;
         bool wasMoved;
 
-
-
         void Start()
         {
             playerMovable = gameObject.GetComponent<Movable>();
@@ -41,10 +39,8 @@ namespace Assets.Scripts.Game
                 Movable[] movables = FindObjectsOfType<Movable>();
                 foreach (Movable movable in movables)
                 {
-                    //Debug.Log(movable.gameObject.name);
                     movable.ResetPosition();
                 }
-                //playerMovable.ResetPosition();
                 Instantiate(gameObject, playerMovable.GetFirstPosition(), Quaternion.identity);
                 Destroy(this);
             }
@@ -54,9 +50,9 @@ namespace Assets.Scripts.Game
                 Movable[] movables = FindObjectsOfType<Movable>();
                 foreach (Movable movable in movables)
                 {
-                    //Debug.Log(movable.gameObject.name);
                     movable.MakeAMove();
                 }
+
             }
         }
     }

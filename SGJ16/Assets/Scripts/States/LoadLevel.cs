@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using Assets.Scripts.Game;
+using System.IO;
 
 namespace Assets.Scripts.States
 {
@@ -21,28 +22,74 @@ namespace Assets.Scripts.States
         [SerializeField]
         GameObject enemy = null;
 
+        [SerializeField]
+        string levelPath = "Levels\\0";
+
         public override void Init()
         {
-            mapWidth = 6;
-            mapHeight = 6;
-
             GameObject grid = new GameObject("grid");
 
-            GameObject newPlayer = Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity) as GameObject;
-            newPlayer.AddComponent<Player>();
-            newPlayer.AddComponent<Movable>();
-
-
-            GameObject newEnemy = Instantiate(enemy, new Vector3(3, 3, -1), Quaternion.identity) as GameObject;
-            newEnemy.AddComponent<Enemy>();
-            newEnemy.AddComponent<Movable>();
-
-            for (int i = 0; i < mapWidth; ++i)
+            using (StreamReader reader = new StreamReader(levelPath + ".grid"))
             {
-                for(int j = 0; j < mapHeight; ++j)
+                string line = reader.ReadLine();
+                string[] words = line.Split();
+                mapWidth = Int32.Parse(words[0]);
+                mapHeight = Int32.Parse(words[1]);
+
+                for (int i = 0; i < mapHeight; ++i)
                 {
-                    GameObject newField = Instantiate(field, new Vector3(i, j, 0), Quaternion.identity) as GameObject;
-                    newField.transform.parent = grid.transform;
+                    line = reader.ReadLine();
+                    words = line.Split();
+
+                    for (int j = 0; j < mapWidth; ++j)
+                    {
+                        GameObject newField = null;
+
+                        if (words[j] == "C")
+                            newField = Instantiate(field, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
+
+                        newField.transform.parent = grid.transform;
+                    }
+                }
+            }
+
+            using (StreamReader reader = new StreamReader(levelPath + ".player"))
+            {
+                string line = reader.ReadLine();
+                string[] words = line.Split();
+                int x = Int32.Parse(words[0]);
+                int y = Int32.Parse(words[1]);
+                if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight)
+                    Debug.Log("Congrats! You're an idiot. Place player on a grid.");
+
+                GameObject newPlayer = Instantiate(player, new Vector3(x, y, -1), Quaternion.identity) as GameObject;
+                newPlayer.AddComponent<Player>();
+                newPlayer.AddComponent<Movable>();
+            }
+
+            using (StreamReader reader = new StreamReader(levelPath + ".enemies"))
+            {
+                string line = reader.ReadLine();
+                int howManyEnemies = Int32.Parse(line);
+
+                for (int i = 0; i < howManyEnemies; ++i)
+                {
+                    line = reader.ReadLine();
+                    string[] words = line.Split();
+                    int x = Int32.Parse(words[0]);
+                    int y = Int32.Parse(words[1]);
+                    if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight)
+                        Debug.Log("Congrats! You're an idiot. Place enemies on a grid.");
+
+                    GameObject newEnemy = Instantiate(enemy, new Vector3(x, y, -1), Quaternion.identity) as GameObject;
+                    newEnemy.AddComponent<Enemy>();
+                    newEnemy.AddComponent<Movable>();
+
+                    x = Int32.Parse(words[2]);
+                    y = Int32.Parse(words[3]);
+                    if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight)
+                        Debug.Log("Congrats! You're an idiot. Place enemy's target on a grid.");
+                    newEnemy.GetComponent<Enemy>().TargetPosition = new Vector3(x, y, -1);
                 }
             }
 

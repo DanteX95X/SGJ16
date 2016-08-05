@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Game
 {
     public class Player : MonoBehaviour
     {
-        //Vector3 position;
         Movable playerMovable;
+        bool wasMoved;
 
         void Start()
         {
-            //position = gameObject.transform.position;
             playerMovable = gameObject.GetComponent<Movable>();
             Debug.Log("player spawned");
         }
@@ -22,16 +22,40 @@ namespace Assets.Scripts.Game
 
         void HandleInput()
         {
+            wasMoved = true;
             if (Input.GetKeyDown(KeyCode.W))
                 playerMovable.position.y += 1;
-            if (Input.GetKeyDown(KeyCode.S))
+            else if (Input.GetKeyDown(KeyCode.S))
                 playerMovable.position.y -= 1;
-            if (Input.GetKeyDown(KeyCode.A))
+            else if (Input.GetKeyDown(KeyCode.A))
                 playerMovable.position.x -= 1;
-            if (Input.GetKeyDown(KeyCode.D))
+            else if (Input.GetKeyDown(KeyCode.D))
                 playerMovable.position.x += 1;
+            else
+                wasMoved = false;
 
-            //gameObject.transform.position = position;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Movable[] movables = FindObjectsOfType<Movable>();
+                foreach (Movable movable in movables)
+                {
+                    //Debug.Log(movable.gameObject.name);
+                    movable.ResetPosition();
+                }
+                //playerMovable.ResetPosition();
+                Instantiate(gameObject, playerMovable.GetFirstPosition(), Quaternion.identity);
+                Destroy(this);
+            }
+
+            if (wasMoved)
+            {
+                Movable[] movables = FindObjectsOfType<Movable>();
+                foreach (Movable movable in movables)
+                {
+                    //Debug.Log(movable.gameObject.name);
+                    movable.MakeAMove();
+                }
+            }
         }
     }
 }

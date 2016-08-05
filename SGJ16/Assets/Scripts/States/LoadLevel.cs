@@ -100,6 +100,5 @@ namespace Assets.Scripts.States
         {
             
         }
-
     }
 }

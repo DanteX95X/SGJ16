@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityEngine.Ma
 
 namespace Assets.Scripts.Game
 {
     public class Enemy : MonoBehaviour
     {
-
         Movable enemyMovable;
 
-        Vector3 targetPosition = new Vector3(0, 0, 0);//(5, 0, -1);
+        Vector3 targetPosition = new Vector3(0, 0, 0);
 
         public Vector3 TargetPosition
         {
@@ -27,10 +25,7 @@ namespace Assets.Scripts.Game
         // Update is called once per frame
         void Update()
         {
-          //  if(!enemyMovable.IsExecutingPastMovements())
-          //  {
-           //     UpdatePosition();
-          //  }
+
         }
 
         public void UpdatePosition()
@@ -60,10 +55,6 @@ namespace Assets.Scripts.Game
                         enemyMovable.position.y += 1;
                     }
                 }
-
          }
-        
-
     }
-
 }

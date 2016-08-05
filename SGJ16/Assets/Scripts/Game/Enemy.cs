@@ -9,7 +9,13 @@ namespace Assets.Scripts.Game
 
         Movable enemyMovable;
 
-        public Vector3 directPosition = new Vector3(5, 0, -1);
+        Vector3 targetPosition = new Vector3(0, 0, 0);//(5, 0, -1);
+
+        public Vector3 TargetPosition
+        {
+            get { return targetPosition; }
+            set { targetPosition = value; }
+        }
 
         // Use this for initialization
         void Start()
@@ -29,35 +35,32 @@ namespace Assets.Scripts.Game
 
         public void UpdatePosition()
         {
-                float dX = gameObject.transform.position.x - directPosition.x;
-                float dY = gameObject.transform.position.y - directPosition.y;
+                float dX = gameObject.transform.position.x - targetPosition.x;
+                float dY = gameObject.transform.position.y - targetPosition.y;
 
-              //  if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.A)) && (gameObject.transform.position != directPosition))
-            //    {
-                    if ((UnityEngine.Mathf.Abs(dX) > UnityEngine.Mathf.Abs(dY)) && dX != 0)
+                if ((UnityEngine.Mathf.Abs(dX) > UnityEngine.Mathf.Abs(dY)) && dX != 0)
+                {
+                    if (dX > 0)
                     {
-                        if (dX > 0)
-                        {
-                            enemyMovable.position.x -= 1;
-                        }
-                        else
-                        {
-                            enemyMovable.position.x += 1;
-                        }
+                        enemyMovable.position.x -= 1;
                     }
-                    else if (dY != 0)
+                    else
                     {
-                        if (dY > 0)
-                        {
-                            enemyMovable.position.y -= 1;
-                        }
-                        else
-                        {
-                            enemyMovable.position.y += 1;
-                        }
+                        enemyMovable.position.x += 1;
                     }
+                }
+                else if (dY != 0)
+                {
+                    if (dY > 0)
+                    {
+                        enemyMovable.position.y -= 1;
+                    }
+                    else
+                    {
+                        enemyMovable.position.y += 1;
+                    }
+                }
 
-                //}
          }
         
 

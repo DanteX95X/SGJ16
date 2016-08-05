@@ -27,7 +27,7 @@ namespace Assets.Scripts.Game
                 gameObject.transform.position = position;
                 ++lastExecutedMove;
 
-                if (!IsExecutingPastMovements())//lastExecutedMove >= positionsThroughTime.Count - 1)
+                if (!IsExecutingPastMovements())
                     positionsThroughTime.Add(position);       
             }
         }
@@ -46,9 +46,7 @@ namespace Assets.Scripts.Game
 
         public void MakeAMove()
         {
-            Debug.Log(lastExecutedMove);
-            Debug.Log(positionsThroughTime.Count);
-            if(IsExecutingPastMovements())//lastExecutedMove < positionsThroughTime.Count - 1)
+            if(IsExecutingPastMovements())
             {
                 gameObject.transform.position = positionsThroughTime[++lastExecutedMove];
                 position = gameObject.transform.position;

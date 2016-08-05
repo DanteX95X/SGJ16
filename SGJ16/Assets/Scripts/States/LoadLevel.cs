@@ -36,10 +36,15 @@ namespace Assets.Scripts.States
                 mapWidth = Int32.Parse(words[0]);
                 mapHeight = Int32.Parse(words[1]);
 
+                Grid.height = mapHeight;
+                Grid.width = mapWidth;
+
                 for (int i = 0; i < mapHeight; ++i)
                 {
                     line = reader.ReadLine();
                     words = line.Split();
+
+                    List<GameObject> fieldLine = new List<GameObject>();
 
                     for (int j = 0; j < mapWidth; ++j)
                     {
@@ -49,7 +54,10 @@ namespace Assets.Scripts.States
                             newField = Instantiate(field, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
 
                         newField.transform.parent = grid.transform;
+                        fieldLine.Add(newField);
                     }
+
+                    Grid.fields.Add(fieldLine);
                 }
             }
 

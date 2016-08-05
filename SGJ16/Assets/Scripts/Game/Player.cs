@@ -34,6 +34,13 @@ namespace Assets.Scripts.Game
             else
                 wasMoved = false;
 
+            if(playerMovable.position.x < 0 || playerMovable.position.x >= Grid.width || playerMovable.position.y < 0 || playerMovable.position.y >= Grid.height)
+            {
+                playerMovable.position = transform.position;
+                Debug.Log("Can't move there sucker");
+                return;
+            }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Movable[] movables = FindObjectsOfType<Movable>();
@@ -62,7 +69,7 @@ namespace Assets.Scripts.Game
                     {
                         if(enemy.GetComponent<Movable>().position == player.GetComponent<Movable>().position)
                         {
-                            Debug.Log("Colision");
+                            Debug.Log("Time travel!!!");
                         }
                     }
                 }

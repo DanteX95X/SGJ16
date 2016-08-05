@@ -64,5 +64,10 @@ namespace Assets.Scripts.Game
         {
             return lastExecutedMove < positionsThroughTime.Count - 1;
         }
+
+        public GameObject GetFieldUnderMovable()
+        {
+            return Grid.fields[(int)position.y][(int)position.x];
+        }
     }
 }

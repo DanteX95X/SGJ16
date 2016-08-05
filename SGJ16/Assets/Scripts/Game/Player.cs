@@ -57,6 +57,22 @@ namespace Assets.Scripts.Game
                     //Debug.Log(movable.gameObject.name);
                     movable.MakeAMove();
                 }
+
+
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+                foreach (GameObject enemy in enemies)
+                {
+                    foreach(GameObject player in players)
+                    {
+                        if(enemy.GetComponent<Movable>().position == player.GetComponent<Movable>().position)
+                        {
+                            Debug.Log("Colision");
+                        }
+                    }
+                }
+
             }
         }
     }

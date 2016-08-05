@@ -53,6 +53,13 @@ namespace Assets.Scripts.Game
                 gameObject.transform.position = positionsThroughTime[++lastExecutedMove];
                 position = gameObject.transform.position;
             }
+            else
+            {
+                if (gameObject.tag == "Enemy")
+                {
+                    gameObject.GetComponent<Enemy>().UpdatePosition();
+                }
+            }
         }
 
         public bool IsExecutingPastMovements()

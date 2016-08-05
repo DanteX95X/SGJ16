@@ -17,7 +17,9 @@ namespace Assets.Scripts.States
 
         [SerializeField]
         GameObject player = null;
-        
+
+        [SerializeField]
+        GameObject enemy = null;
 
         public override void Init()
         {
@@ -30,7 +32,12 @@ namespace Assets.Scripts.States
             newPlayer.AddComponent<Player>();
             newPlayer.AddComponent<Movable>();
 
-            for(int i = 0; i < mapWidth; ++i)
+
+            GameObject newEnemy = Instantiate(enemy, new Vector3(3, 3, -1), Quaternion.identity) as GameObject;
+            newEnemy.AddComponent<Enemy>();
+            newEnemy.AddComponent<Movable>();
+
+            for (int i = 0; i < mapWidth; ++i)
             {
                 for(int j = 0; j < mapHeight; ++j)
                 {

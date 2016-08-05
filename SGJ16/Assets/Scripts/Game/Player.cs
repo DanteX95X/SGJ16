@@ -8,6 +8,8 @@ namespace Assets.Scripts.Game
         //Vector3 position;
         Movable playerMovable;
 
+
+
         void Start()
         {
             //position = gameObject.transform.position;

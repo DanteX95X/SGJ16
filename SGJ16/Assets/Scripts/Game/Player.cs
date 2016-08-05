@@ -1,32 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour
+namespace Assets.Scripts.Game
 {
-    Vector3 position;
-
-	void Start ()
+    public class Player : MonoBehaviour
     {
-        position = gameObject.transform.position;
-        Debug.Log("player spawned");
-	}
-	
-	void Update ()
-    {
-        HandleInput();
-	}
+        //Vector3 position;
+        Movable playerMovable;
 
-    void HandleInput()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-            position.y += 1;
-        if (Input.GetKeyDown(KeyCode.S))
-            position.y -= 1;
-        if (Input.GetKeyDown(KeyCode.A))
-            position.x -= 1;
-        if (Input.GetKeyDown(KeyCode.D))
-            position.x += 1;
+        void Start()
+        {
+            //position = gameObject.transform.position;
+            playerMovable = gameObject.GetComponent<Movable>();
+            Debug.Log("player spawned");
+        }
 
-        gameObject.transform.position = position;
+        void Update()
+        {
+            HandleInput();
+        }
+
+        void HandleInput()
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+                playerMovable.position.y += 1;
+            if (Input.GetKeyDown(KeyCode.S))
+                playerMovable.position.y -= 1;
+            if (Input.GetKeyDown(KeyCode.A))
+                playerMovable.position.x -= 1;
+            if (Input.GetKeyDown(KeyCode.D))
+                playerMovable.position.x += 1;
+
+            //gameObject.transform.position = position;
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Assets.Scripts.Game;
 
 namespace Assets.Scripts.States
 {
@@ -27,6 +28,7 @@ namespace Assets.Scripts.States
 
             GameObject newPlayer = Instantiate(player, new Vector3(0, 0, -1), Quaternion.identity) as GameObject;
             newPlayer.AddComponent<Player>();
+            newPlayer.AddComponent<Movable>();
 
             for(int i = 0; i < mapWidth; ++i)
             {

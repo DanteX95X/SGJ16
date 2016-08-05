@@ -27,7 +27,7 @@ namespace Assets.Scripts.Game
                 gameObject.transform.position = position;
                 ++lastExecutedMove;
 
-                if (lastExecutedMove >= positionsThroughTime.Count - 1)
+                if (!IsExecutingPastMovements())//lastExecutedMove >= positionsThroughTime.Count - 1)
                     positionsThroughTime.Add(position);       
             }
         }
@@ -48,11 +48,16 @@ namespace Assets.Scripts.Game
         {
             Debug.Log(lastExecutedMove);
             Debug.Log(positionsThroughTime.Count);
-            if(lastExecutedMove < positionsThroughTime.Count - 1)
+            if(IsExecutingPastMovements())//lastExecutedMove < positionsThroughTime.Count - 1)
             {
                 gameObject.transform.position = positionsThroughTime[++lastExecutedMove];
                 position = gameObject.transform.position;
             }
+        }
+
+        public bool IsExecutingPastMovements()
+        {
+            return lastExecutedMove < positionsThroughTime.Count - 1;
         }
     }
 }

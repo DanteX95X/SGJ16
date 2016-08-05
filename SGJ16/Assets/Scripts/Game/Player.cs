@@ -18,13 +18,13 @@ public class Player : MonoBehaviour
 
     void HandleInput()
     {
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W))
             position.y += 1;
-        if (Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
             position.y -= 1;
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
             position.x -= 1;
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
             position.x += 1;
 
         gameObject.transform.position = position;

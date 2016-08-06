@@ -13,6 +13,7 @@ namespace Assets.Scripts.Game
         {
             playerMovable = gameObject.GetComponent<Movable>();
             Debug.Log("player spawned");
+
         }
 
         void Update()

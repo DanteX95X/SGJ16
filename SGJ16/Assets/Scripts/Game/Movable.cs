@@ -8,13 +8,16 @@ namespace Assets.Scripts.Game
 {
     class Movable : MonoBehaviour
     {
+        Quaternion firstRotation = Quaternion.Euler(0, 0, 0);
         public Vector3 position;
-    //    public Quaternion rotation;
+        public Quaternion rotation;
+        public Vector3 eulerRotation;
 
         int lastExecutedMove;
         List<Vector3> positionsThroughTime;
 
         int speed = 3;
+        int rotationSpeed = 300;
         public int movementPoints;
 
         public bool isMoving = false;
@@ -32,10 +35,28 @@ namespace Assets.Scripts.Game
             positionsThroughTime.Add(position);
             lastExecutedMove = 0;
             movementPoints = 1;
+            gameObject.transform.rotation = firstRotation;
+            rotation = gameObject.transform.rotation;
         }
 
         void Update()
         {
+            if (rotation != gameObject.transform.rotation)
+            {
+                print(rotation.eulerAngles.z);
+                if(Mathf.Abs(rotation.eulerAngles.z - gameObject.transform.rotation.eulerAngles.z) < 5)
+                {
+                    gameObject.transform.rotation = rotation;
+                    eulerRotation = new Vector3(0,0, rotation.eulerAngles.z);
+                }
+                else
+                {
+                    print(transform.rotation.eulerAngles.z);
+                    float step = rotationSpeed * Time.deltaTime;
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, step);
+                }
+
+            }
             if (position != gameObject.transform.position)
             {
                 if (Mathf.Abs(position.x - transform.position.x) + Mathf.Abs(position.y - transform.position.y) < 0.1f)
@@ -62,6 +83,8 @@ namespace Assets.Scripts.Game
             position = GetFirstPosition();
             gameObject.transform.position = position;
             lastExecutedMove = 0;
+            gameObject.transform.rotation = firstRotation;
+            rotation = gameObject.transform.rotation;
         }
 
         public Vector3 GetFirstPosition()
@@ -86,24 +109,25 @@ namespace Assets.Scripts.Game
                 }
             }
 
+           // Quaternion.RotateTowards()
             Vector3 lastDirection = position - gameObject.transform.position;
             
             if (lastDirection.x == 1)
             {
-                gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                rotation = Quaternion.Euler(0, 0, 90);
             }
             if (lastDirection.x == -1)
             {
-                gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                rotation = Quaternion.Euler(0, 0, 270);
             }
         
             if (lastDirection.y == 1)
             {
-                gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                rotation = Quaternion.Euler(0, 0, 180);
             }
             if (lastDirection.y == -1)
             {
-                gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                rotation = Quaternion.Euler(0, 0, 0);
             }
 
         }

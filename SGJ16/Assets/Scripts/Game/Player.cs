@@ -81,10 +81,5 @@ namespace Assets.Scripts.Game
             }
         }
 
-        void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.tag == "Enemy")
-                Destroy(collision.gameObject);
-        }
     }
 }

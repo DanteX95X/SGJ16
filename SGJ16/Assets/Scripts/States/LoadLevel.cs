@@ -57,6 +57,8 @@ namespace Assets.Scripts.States
                             component.SetFieldType(Field.FieldType.CLEAR);
                         else if (words[j] == "L")
                             component.SetFieldType(Field.FieldType.LOST_TURN);
+                        else if (words[j] == "T")
+                            component.SetFieldType(Field.FieldType.TIME_VORTEX);
                             
 
                         newField.transform.parent = grid.transform;

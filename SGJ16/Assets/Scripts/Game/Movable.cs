@@ -16,7 +16,7 @@ namespace Assets.Scripts.Game
         int lastExecutedMove;
         List<Vector3> positionsThroughTime;
 
-        int speed = 3;
+        int speed = 7;
         int rotationSpeed = 300;
         public int movementPoints;
 
@@ -156,6 +156,11 @@ namespace Assets.Scripts.Game
         {
             Field field = GetFieldUnderMovable().GetComponent<Field>();
             field.DoAction(this);
+        }
+
+        public void ClearPositions()
+        {
+            positionsThroughTime.Clear();
         }
     }
 }

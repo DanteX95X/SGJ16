@@ -13,6 +13,7 @@ namespace Assets.Scripts.Game
             CLEAR,
             LOST_TURN,
             DOUBLE_MOVEMENT,
+            TIME_VORTEX,
         }
 
         FieldType type;
@@ -42,6 +43,15 @@ namespace Assets.Scripts.Game
                     break;
                 case FieldType.DOUBLE_MOVEMENT:
                     movable.movementPoints = 2;
+                    break;
+                case FieldType.TIME_VORTEX:
+                    Movable[] movables = FindObjectsOfType<Movable>();
+                    foreach(Movable movableObject in movables)
+                    {
+                        movableObject.ResetPosition();
+                    }
+                    Player player = FindObjectOfType<Player>();
+                    player.gameObject.GetComponent<Movable>().ClearPositions();
                     break;
             }
         }

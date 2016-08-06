@@ -26,5 +26,7 @@ namespace Assets.Scripts.Game
         public static bool isTimeFlowing = false;
 
         public static bool isAnyEnemyAlive = true;
+
+        public static float depth = -0.1f;
     }
 }

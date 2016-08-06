@@ -20,7 +20,9 @@ namespace Assets.Scripts.States
             if (!Grid.isAnyEnemyAlive)
             {
                 Debug.Log("Level won");
-                ChangeState<CleanUp>();
+                //ChangeState<CleanUp>();
+                ++LevelManager.currentLevel;
+                SceneManager.LoadScene(1);
             }
             else if (Grid.lifes < 0)
             {

@@ -99,7 +99,7 @@ namespace Assets.Scripts.States
                 if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight)
                     Debug.Log("Congrats! You're an idiot. Place player on a grid.");
 
-                GameObject newPlayer = Instantiate(player, new Vector3(x, y, -0.5f), Quaternion.identity) as GameObject;
+                GameObject newPlayer = Instantiate(player, new Vector3(x, y, Grid.depth), Quaternion.identity) as GameObject;
                 newPlayer.AddComponent<Player>();
                 newPlayer.AddComponent<Movable>();
             }
@@ -118,7 +118,7 @@ namespace Assets.Scripts.States
                     if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight)
                         Debug.Log("Congrats! You're an idiot. Place enemies on a grid.");
 
-                    GameObject newEnemy = Instantiate(enemy, new Vector3(x, y, -0.5f), Quaternion.identity) as GameObject;
+                    GameObject newEnemy = Instantiate(enemy, new Vector3(x, y, Grid.depth), Quaternion.identity) as GameObject;
                     newEnemy.AddComponent<Enemy>();
                     newEnemy.AddComponent<Movable>();
 
@@ -126,7 +126,7 @@ namespace Assets.Scripts.States
                     y = Int32.Parse(words[3]);
                     if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight)
                         Debug.Log("Congrats! You're an idiot. Place enemy's target on a grid.");
-                    newEnemy.GetComponent<Enemy>().TargetPosition = new Vector3(x, y, -0.5f);
+                    newEnemy.GetComponent<Enemy>().TargetPosition = new Vector3(x, y, Grid.depth);
                 }
             }
 

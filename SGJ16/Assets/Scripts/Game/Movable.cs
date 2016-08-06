@@ -15,8 +15,15 @@ namespace Assets.Scripts.Game
         List<Vector3> positionsThroughTime;
 
         int speed = 3;
+        public int movementPoints;
 
         public bool isMoving = false;
+
+        public int MovementPoints
+        {
+            get { return movementPoints; }
+            set { movementPoints = value; }
+        }
 
         void Start()
         {
@@ -24,6 +31,7 @@ namespace Assets.Scripts.Game
             position = gameObject.transform.position;
             positionsThroughTime.Add(position);
             lastExecutedMove = 0;
+            movementPoints = 1;
         }
 
         void Update()

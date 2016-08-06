@@ -36,10 +36,10 @@ namespace Assets.Scripts.Game
             float currentDistance = Mathf.Abs(transform.position.x - targetPosition.x) + Mathf.Abs(transform.position.y - targetPosition.y);
 
             List<Vector3> neighbours = new List<Vector3>();
-            neighbours.Add(transform.position + new Vector3(-1,0,0));
-            neighbours.Add(transform.position + new Vector3(1, 0, 0));
-            neighbours.Add(transform.position + new Vector3(0, -1, 0));
-            neighbours.Add(transform.position + new Vector3(0, 1, 0));
+            neighbours.Add(transform.position + new Vector3(-enemyMovable.MovementPoints,0,0));
+            neighbours.Add(transform.position + new Vector3(enemyMovable.MovementPoints, 0, 0));
+            neighbours.Add(transform.position + new Vector3(0, -enemyMovable.MovementPoints, 0));
+            neighbours.Add(transform.position + new Vector3(0, enemyMovable.MovementPoints, 0));
 
             List<Vector3> allowedMovements = new List<Vector3>();
             foreach(Vector3 possiblePosition in neighbours)

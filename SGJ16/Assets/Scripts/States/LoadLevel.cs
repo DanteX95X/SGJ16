@@ -49,9 +49,15 @@ namespace Assets.Scripts.States
                     for (int j = 0; j < mapWidth; ++j)
                     {
                         GameObject newField = null;
+                        newField = Instantiate(field, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
+                        newField.AddComponent<Field>();
+                        Field component = newField.GetComponent<Field>();
 
                         if (words[j] == "C")
-                            newField = Instantiate(field, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
+                            component.SetFieldType(Field.FieldType.CLEAR);
+                        else if (words[j] == "L")
+                            component.SetFieldType(Field.FieldType.LOST_TURN);
+                            
 
                         newField.transform.parent = grid.transform;
                         fieldLine.Add(newField);

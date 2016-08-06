@@ -21,6 +21,7 @@ namespace Assets.Scripts.Game
         public int movementPoints;
 
         public bool isMoving = false;
+        bool isFieldEffectApplied = false;
 
         public int MovementPoints
         {
@@ -43,7 +44,7 @@ namespace Assets.Scripts.Game
         {
             if (rotation != gameObject.transform.rotation)
             {
-                print(rotation.eulerAngles.z);
+                //print(rotation.eulerAngles.z);
                 if(Mathf.Abs(rotation.eulerAngles.z - gameObject.transform.rotation.eulerAngles.z) < 5)
                 {
                     gameObject.transform.rotation = rotation;
@@ -51,7 +52,7 @@ namespace Assets.Scripts.Game
                 }
                 else
                 {
-                    print(transform.rotation.eulerAngles.z);
+                    //print(transform.rotation.eulerAngles.z);
                     float step = rotationSpeed * Time.deltaTime;
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, step);
                 }
@@ -63,6 +64,8 @@ namespace Assets.Scripts.Game
                 {
                     isMoving = false;
                     gameObject.transform.position = position;
+                    Field field = GetFieldUnderMovable().GetComponent<Field>();
+                    field.DoAction(this);
 
                     if (!IsExecutingPastMovements())
                     {
@@ -132,6 +135,7 @@ namespace Assets.Scripts.Game
                 rotation = Quaternion.Euler(0, 0, 0);
             }
 
+            movementPoints = 1;
         }
 
         public bool IsExecutingPastMovements()

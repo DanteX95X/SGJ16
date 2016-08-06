@@ -14,7 +14,11 @@ namespace Assets.Scripts.States
         int mapHeight;
 
         [SerializeField]
-        GameObject field = null;
+        GameObject clearField = null;
+        [SerializeField]
+        GameObject slowField = null;
+        [SerializeField]
+        GameObject timeReversalField = null;
 
         [SerializeField]
         GameObject player = null;
@@ -52,16 +56,29 @@ namespace Assets.Scripts.States
                     for (int j = 0; j < mapWidth; ++j)
                     {
                         GameObject newField = null;
-                        newField = Instantiate(field, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
-                        newField.AddComponent<Field>();
-                        Field component = newField.GetComponent<Field>();
+
 
                         if (words[j] == "C")
+                        {
+                            newField = Instantiate(clearField, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
+                            newField.AddComponent<Field>();
+                            Field component = newField.GetComponent<Field>();
                             component.SetFieldType(Field.FieldType.CLEAR);
+                        }
                         else if (words[j] == "L")
+                        {
+                            newField = Instantiate(slowField, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
+                            newField.AddComponent<Field>();
+                            Field component = newField.GetComponent<Field>();
                             component.SetFieldType(Field.FieldType.LOST_TURN);
+                        }
                         else if (words[j] == "T")
+                        {
+                            newField = Instantiate(timeReversalField, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
+                            newField.AddComponent<Field>();
+                            Field component = newField.GetComponent<Field>();
                             component.SetFieldType(Field.FieldType.TIME_VORTEX);
+                        }
                             
 
                         newField.transform.parent = grid.transform;

@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using Assets.Scripts.Game;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.States
 {
@@ -27,10 +28,20 @@ namespace Assets.Scripts.States
         GameObject enemy = null;
 
         [SerializeField]
-        string levelPath = "Levels\\0";
+        string levelPath;// = "Levels\\0";
 
         public override void Init()
         {
+            levelPath = LevelManager.levelPath + LevelManager.currentLevel;
+
+            if(!File.Exists(levelPath + ".grid") || !File.Exists(levelPath + ".player") || !File.Exists(levelPath + ".enemies"))
+            {
+                Debug.Log("No more levels");
+                LevelManager.currentLevel = 0;
+                SceneManager.LoadScene(0);
+                return;
+            }
+
             Grid.fields = new List<List<GameObject>>();
             Grid.isAnyEnemyAlive = true;
 
@@ -130,6 +141,7 @@ namespace Assets.Scripts.States
                 }
             }
 
+            GameObject.FindObjectOfType<Camera>().gameObject.AddComponent<CameraMovement>();
             ChangeState<Game>();
         }
 

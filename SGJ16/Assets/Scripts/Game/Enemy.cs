@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.Game
 {
@@ -30,31 +31,56 @@ namespace Assets.Scripts.Game
 
         public void UpdatePosition()
         {
-                float dX = gameObject.transform.position.x - targetPosition.x;
-                float dY = gameObject.transform.position.y - targetPosition.y;
+            //float dX = gameObject.transform.position.x - targetPosition.x;
+            //float dY = gameObject.transform.position.y - targetPosition.y;
+            float currentDistance = Mathf.Abs(transform.position.x - targetPosition.x) + Mathf.Abs(transform.position.y - targetPosition.y);
 
-                if ((UnityEngine.Mathf.Abs(dX) > UnityEngine.Mathf.Abs(dY)) && dX != 0)
+            List<Vector3> neighbours = new List<Vector3>();
+            neighbours.Add(transform.position + new Vector3(-1,0,0));
+            neighbours.Add(transform.position + new Vector3(1, 0, 0));
+            neighbours.Add(transform.position + new Vector3(0, -1, 0));
+            neighbours.Add(transform.position + new Vector3(0, 1, 0));
+
+            List<Vector3> allowedMovements = new List<Vector3>();
+            foreach(Vector3 possiblePosition in neighbours)
+            {
+                float consideredDistance = Mathf.Abs(possiblePosition.x - targetPosition.x) + Mathf.Abs(possiblePosition.y - targetPosition.y);
+                if (IsOnGrid(possiblePosition) && consideredDistance < currentDistance)
+                    allowedMovements.Add(possiblePosition);
+            }
+
+            int index = Random.Range(0, allowedMovements.Count);
+
+            if(allowedMovements.Count > 0)
+                enemyMovable.position = allowedMovements[index];
+
+            /*if ((UnityEngine.Mathf.Abs(dX) > UnityEngine.Mathf.Abs(dY)) && dX != 0)
+            {
+                if (dX > 0)
                 {
-                    if (dX > 0)
-                    {
-                        enemyMovable.position.x -= 1;
-                    }
-                    else
-                    {
-                        enemyMovable.position.x += 1;
-                    }
+                    enemyMovable.position.x -= 1;
                 }
-                else if (dY != 0)
+                else
                 {
-                    if (dY > 0)
-                    {
-                        enemyMovable.position.y -= 1;
-                    }
-                    else
-                    {
-                        enemyMovable.position.y += 1;
-                    }
+                    enemyMovable.position.x += 1;
                 }
+            }
+            else if (dY != 0)
+            {
+                if (dY > 0)
+                {
+                    enemyMovable.position.y -= 1;
+                }
+                else
+                {
+                    enemyMovable.position.y += 1;
+                }
+            }*/
          }
+
+        bool IsOnGrid(Vector3 vector)
+        {
+            return vector.x >= 0 && vector.x < Grid.width && vector.y >= 0 && vector.y < Grid.height;
+        }
     }
 }

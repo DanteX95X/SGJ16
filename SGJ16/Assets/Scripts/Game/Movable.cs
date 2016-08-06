@@ -21,7 +21,6 @@ namespace Assets.Scripts.Game
         public int movementPoints;
 
         public bool isMoving = false;
-        bool isFieldEffectApplied = false;
 
         public int MovementPoints
         {
@@ -38,6 +37,8 @@ namespace Assets.Scripts.Game
             movementPoints = 1;
             gameObject.transform.rotation = firstRotation;
             rotation = gameObject.transform.rotation;
+
+            ActivateField();
         }
 
         void Update()
@@ -64,8 +65,8 @@ namespace Assets.Scripts.Game
                 {
                     isMoving = false;
                     gameObject.transform.position = position;
-                    Field field = GetFieldUnderMovable().GetComponent<Field>();
-                    field.DoAction(this);
+
+                    ActivateField();
 
                     if (!IsExecutingPastMovements())
                     {
@@ -88,6 +89,8 @@ namespace Assets.Scripts.Game
             lastExecutedMove = 0;
             gameObject.transform.rotation = firstRotation;
             rotation = gameObject.transform.rotation;
+
+            ActivateField();
         }
 
         public Vector3 GetFirstPosition()
@@ -101,7 +104,8 @@ namespace Assets.Scripts.Game
                 gameObject.GetComponent<Enemy>().UpdatePosition();
             else if(IsExecutingPastMovements())
             {
-                position = positionsThroughTime[++lastExecutedMove];
+                if(movementPoints != 0)
+                    position = positionsThroughTime[++lastExecutedMove];
                 
                 //gameObject.transform.position = position;
                 //Debug.Log(position + " " + transform.position);
@@ -146,6 +150,12 @@ namespace Assets.Scripts.Game
         public GameObject GetFieldUnderMovable()
         {
             return Grid.fields[(int)position.y][(int)position.x];
+        }
+
+        void ActivateField()
+        {
+            Field field = GetFieldUnderMovable().GetComponent<Field>();
+            field.DoAction(this);
         }
     }
 }

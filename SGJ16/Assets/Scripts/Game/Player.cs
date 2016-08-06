@@ -25,7 +25,9 @@ namespace Assets.Scripts.Game
         {
             wasMoved = true;
             if (Input.GetKeyDown(KeyCode.W))
+            {
                 playerMovable.position.y += 1;
+            }
             else if (Input.GetKeyDown(KeyCode.S))
                 playerMovable.position.y -= 1;
             else if (Input.GetKeyDown(KeyCode.A))

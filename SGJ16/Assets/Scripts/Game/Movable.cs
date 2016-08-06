@@ -9,6 +9,8 @@ namespace Assets.Scripts.Game
     class Movable : MonoBehaviour
     {
         public Vector3 position;
+    //    public Quaternion rotation;
+
         int lastExecutedMove;
         List<Vector3> positionsThroughTime;
 
@@ -75,6 +77,27 @@ namespace Assets.Scripts.Game
                     gameObject.GetComponent<Enemy>().UpdatePosition();
                 }
             }
+
+            Vector3 lastDirection = position - gameObject.transform.position;
+            
+            if (lastDirection.x == 1)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
+            if (lastDirection.x == -1)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+            }
+        
+            if (lastDirection.y == 1)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+            }
+            if (lastDirection.y == -1)
+            {
+                gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+
         }
 
         public bool IsExecutingPastMovements()

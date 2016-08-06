@@ -24,6 +24,14 @@ namespace Assets.Scripts.Game
 
         void HandleInput()
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                RewindTime();
+            }
+
+            if (!Grid.isTimeFlowing)
+                return;
+
             wasMoved = true;
             if (Input.GetKeyDown(KeyCode.W))
                 playerMovable.position.y += playerMovable.MovementPoints;
@@ -41,17 +49,6 @@ namespace Assets.Scripts.Game
                 playerMovable.position = transform.position;
                 Debug.Log("Can't move there sucker");
                 return;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Movable[] movables = FindObjectsOfType<Movable>();
-                foreach (Movable movable in movables)
-                {
-                    movable.ResetPosition();
-                }
-                Instantiate(gameObject, playerMovable.GetFirstPosition(), Quaternion.identity);
-                Destroy(this);
             }
 
             if (wasMoved)
@@ -75,10 +72,34 @@ namespace Assets.Scripts.Game
                         {
                             GetComponent<AudioSource>().Play();
                             //Debug.Log("Time travel!!!");
+                            enemy.GetComponent<Movable>().canMove = false;
                         }
                     }
                 }
+
+                Grid.isAnyEnemyAlive = false;
+                foreach(GameObject enemy in enemies)
+                {
+                    if (enemy.GetComponent<Movable>().canMove)
+                    {
+                        Grid.isAnyEnemyAlive = true;
+                        break;
+                    }
+                }
+
             }
+        }
+
+        public void RewindTime()
+        {
+            Movable[] movables = FindObjectsOfType<Movable>();
+            foreach (Movable movable in movables)
+            {
+                movable.ResetPosition();
+            }
+            Instantiate(gameObject, playerMovable.GetFirstPosition(), Quaternion.identity);
+            Grid.isTimeFlowing = true;
+            Destroy(this);
         }
 
     }

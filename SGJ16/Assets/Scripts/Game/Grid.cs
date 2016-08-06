@@ -21,5 +21,9 @@ namespace Assets.Scripts.Game
         {
             return Mathf.Abs(first.x - second.x) + Mathf.Abs(first.y - second.y);
         }
+
+        public static bool isTimeFlowing = false;
+
+        public static bool isAnyEnemyAlive = true;
     }
 }

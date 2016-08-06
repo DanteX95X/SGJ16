@@ -27,6 +27,9 @@ namespace Assets.Scripts.States
 
         public override void Init()
         {
+            Grid.fields = new List<List<GameObject>>();
+            Grid.isAnyEnemyAlive = true;
+
             GameObject grid = new GameObject("grid");
 
             using (StreamReader reader = new StreamReader(levelPath + ".grid"))
@@ -109,7 +112,7 @@ namespace Assets.Scripts.States
                 }
             }
 
-            ChangeState<DummyState>();
+            ChangeState<Game>();
         }
 
         public override void UpdateLoop()

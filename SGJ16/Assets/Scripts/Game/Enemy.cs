@@ -16,14 +16,12 @@ namespace Assets.Scripts.Game
             set { targetPosition = value; }
         }
 
-        // Use this for initialization
         void Start()
         {
             enemyMovable = gameObject.GetComponent<Movable>();
             Debug.Log("enemy spawned");
         }
 
-        // Update is called once per frame
         void Update()
         {
 
@@ -41,6 +39,12 @@ namespace Assets.Scripts.Game
                 neighbours.Add(transform.position + new Vector3(0, enemyMovable.MovementPoints, 0));
 
                 MoveTowardsTarget(neighbours);
+
+                if (enemyMovable.position == targetPosition)
+                {
+                    Grid.isTimeFlowing = false;
+                    Debug.Log("You fucked up! Please rewind");
+                }
             }
 
          }
@@ -78,7 +82,7 @@ namespace Assets.Scripts.Game
                         {
                             if (player.transform.position == possiblePosition)
                             {
-                                Debug.Log("Not safe " + possiblePosition);
+                                //Debug.Log("Not safe " + possiblePosition);
                                 isPositionSafe = false;
                             }
                         }
@@ -87,7 +91,7 @@ namespace Assets.Scripts.Game
                             allowedMovements.Add(possiblePosition);
                     }
                 }
-                Debug.Log(allowedMovements.Count);
+                //Debug.Log(allowedMovements.Count);
             }
 
             int index = Random.Range(0, allowedMovements.Count);
@@ -95,8 +99,6 @@ namespace Assets.Scripts.Game
             if (allowedMovements.Count > 0)
                 enemyMovable.position = allowedMovements[index];
         }
-
-        //void MoveAwayFromPlayer()
 
     }
 }

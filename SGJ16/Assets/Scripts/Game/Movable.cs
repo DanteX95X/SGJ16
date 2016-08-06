@@ -69,19 +69,21 @@ namespace Assets.Scripts.Game
 
         public void MakeAMove()
         {
-            if(IsExecutingPastMovements())
+            if (gameObject.tag == "Enemy")
+                gameObject.GetComponent<Enemy>().UpdatePosition();
+            else if(IsExecutingPastMovements())
             {
                 position = positionsThroughTime[++lastExecutedMove];
                 
                 //gameObject.transform.position = position;
-                Debug.Log(position + " " + transform.position);
+                //Debug.Log(position + " " + transform.position);
             }
             else
             {
-                if (gameObject.tag == "Enemy")
+                /*if (gameObject.tag == "Enemy")
                 {
                     gameObject.GetComponent<Enemy>().UpdatePosition();
-                }
+                }*/
             }
         }
 

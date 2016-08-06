@@ -31,56 +31,72 @@ namespace Assets.Scripts.Game
 
         public void UpdatePosition()
         {
-            //float dX = gameObject.transform.position.x - targetPosition.x;
-            //float dY = gameObject.transform.position.y - targetPosition.y;
-            float currentDistance = Mathf.Abs(transform.position.x - targetPosition.x) + Mathf.Abs(transform.position.y - targetPosition.y);
-
-            List<Vector3> neighbours = new List<Vector3>();
-            neighbours.Add(transform.position + new Vector3(-enemyMovable.MovementPoints,0,0));
-            neighbours.Add(transform.position + new Vector3(enemyMovable.MovementPoints, 0, 0));
-            neighbours.Add(transform.position + new Vector3(0, -enemyMovable.MovementPoints, 0));
-            neighbours.Add(transform.position + new Vector3(0, enemyMovable.MovementPoints, 0));
-
-            List<Vector3> allowedMovements = new List<Vector3>();
-            foreach(Vector3 possiblePosition in neighbours)
+            if (enemyMovable.position != targetPosition)
             {
+
+                List<Vector3> neighbours = new List<Vector3>();
+                neighbours.Add(transform.position + new Vector3(-enemyMovable.MovementPoints, 0, 0));
+                neighbours.Add(transform.position + new Vector3(enemyMovable.MovementPoints, 0, 0));
+                neighbours.Add(transform.position + new Vector3(0, -enemyMovable.MovementPoints, 0));
+                neighbours.Add(transform.position + new Vector3(0, enemyMovable.MovementPoints, 0));
+
+                MoveTowardsTarget(neighbours);
+            }
+
+         }
+
+        void MoveTowardsTarget(List<Vector3> neighbours)
+        {
+            float currentDistance = Grid.CalculateDistance(transform.position, targetPosition);
+            List<Vector3> allowedMovements = new List<Vector3>();
+            bool isEndangered = false;
+            foreach (Vector3 possiblePosition in neighbours)
+            {
+                //bool isEndangered = false;
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                foreach (GameObject player in players)
+                {
+                    if (player.transform.position == possiblePosition)
+                        isEndangered = true;
+                }
+
                 float consideredDistance = Mathf.Abs(possiblePosition.x - targetPosition.x) + Mathf.Abs(possiblePosition.y - targetPosition.y);
-                if (IsOnGrid(possiblePosition) && consideredDistance < currentDistance)
+                if (Grid.IsOnGrid(possiblePosition) && consideredDistance < currentDistance && !isEndangered)
                     allowedMovements.Add(possiblePosition);
+            }
+
+            if(isEndangered)
+            {
+                allowedMovements.Clear();
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                foreach (Vector3 possiblePosition in neighbours)
+                {
+                    if (Grid.IsOnGrid(possiblePosition))
+                    {
+                        bool isPositionSafe = true;
+                        foreach (GameObject player in players)
+                        {
+                            if (player.transform.position == possiblePosition)
+                            {
+                                Debug.Log("Not safe " + possiblePosition);
+                                isPositionSafe = false;
+                            }
+                        }
+
+                        if (isPositionSafe)
+                            allowedMovements.Add(possiblePosition);
+                    }
+                }
+                Debug.Log(allowedMovements.Count);
             }
 
             int index = Random.Range(0, allowedMovements.Count);
 
-            if(allowedMovements.Count > 0)
+            if (allowedMovements.Count > 0)
                 enemyMovable.position = allowedMovements[index];
-
-            /*if ((UnityEngine.Mathf.Abs(dX) > UnityEngine.Mathf.Abs(dY)) && dX != 0)
-            {
-                if (dX > 0)
-                {
-                    enemyMovable.position.x -= 1;
-                }
-                else
-                {
-                    enemyMovable.position.x += 1;
-                }
-            }
-            else if (dY != 0)
-            {
-                if (dY > 0)
-                {
-                    enemyMovable.position.y -= 1;
-                }
-                else
-                {
-                    enemyMovable.position.y += 1;
-                }
-            }*/
-         }
-
-        bool IsOnGrid(Vector3 vector)
-        {
-            return vector.x >= 0 && vector.x < Grid.width && vector.y >= 0 && vector.y < Grid.height;
         }
+
+        //void MoveAwayFromPlayer()
+
     }
 }

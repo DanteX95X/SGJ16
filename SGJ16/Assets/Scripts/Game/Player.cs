@@ -25,13 +25,13 @@ namespace Assets.Scripts.Game
         {
             wasMoved = true;
             if (Input.GetKeyDown(KeyCode.W))
-                playerMovable.position.y += playerMovable.movementPoints;
+                playerMovable.position.y += playerMovable.MovementPoints;
             else if (Input.GetKeyDown(KeyCode.S))
-                playerMovable.position.y -= playerMovable.movementPoints;
+                playerMovable.position.y -= playerMovable.MovementPoints;
             else if (Input.GetKeyDown(KeyCode.A))
-                playerMovable.position.x -= playerMovable.movementPoints;
+                playerMovable.position.x -= playerMovable.MovementPoints;
             else if (Input.GetKeyDown(KeyCode.D))
-                playerMovable.position.x += playerMovable.movementPoints;
+                playerMovable.position.x += playerMovable.MovementPoints;
             else
                 wasMoved = false;
 

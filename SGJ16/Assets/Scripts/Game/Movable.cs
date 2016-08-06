@@ -17,6 +17,12 @@ namespace Assets.Scripts.Game
 
         public bool isMoving = false;
 
+        public int MovementPoints
+        {
+            get { return movementPoints; }
+            set { movementPoints = value; }
+        }
+
         void Start()
         {
             positionsThroughTime = new List<Vector3>();

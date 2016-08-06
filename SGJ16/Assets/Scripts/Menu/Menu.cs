@@ -30,7 +30,7 @@ public class Menu : MonoBehaviour {
     BUTTONHEIGHT = Screen.height / 5;
     FIRSTBUTTONPOSX = Screen.width / 2 - Screen.width/4; //this is a BUTTONWITH
     FIRSTBUTTONPOSY = Screen.height / 10;
-}  
+    }  
 
     public void OnGUI()
     {
@@ -39,7 +39,6 @@ public class Menu : MonoBehaviour {
             SceneManager.LoadScene(1);
 
         }
-
         if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 2*FIRSTBUTTONPOSY + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "CREDITS"))
         {
 
@@ -47,7 +46,7 @@ public class Menu : MonoBehaviour {
 
         if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 3 * FIRSTBUTTONPOSY + 2*BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "EXIT"))
         {
-
+            Application.Quit();
         }
     }
 }

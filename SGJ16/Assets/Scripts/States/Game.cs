@@ -22,6 +22,11 @@ namespace Assets.Scripts.States
                 Debug.Log("Level won");
                 ChangeState<CleanUp>();
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape) && Grid.isTimeFlowing)
+            {
+                ChangeState<Pause>();
+            }
         }
     }
 }

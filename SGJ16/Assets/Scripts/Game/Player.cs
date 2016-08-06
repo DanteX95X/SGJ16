@@ -51,6 +51,7 @@ namespace Assets.Scripts.Game
                     movable.ResetPosition();
                 }
                 Instantiate(gameObject, playerMovable.GetFirstPosition(), Quaternion.identity);
+                GetComponent<MaterialChanging>().Changer();
                 Destroy(this);
             }
 

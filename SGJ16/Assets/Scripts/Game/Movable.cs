@@ -8,6 +8,8 @@ namespace Assets.Scripts.Game
 {
     class Movable : MonoBehaviour
     {
+       // public Material movableMaterial = new Material("..\\Materials\\ghost\ skin.mat");
+
         Quaternion firstRotation = Quaternion.Euler(0, 0, 0);
         public Vector3 position;
         public Quaternion rotation;

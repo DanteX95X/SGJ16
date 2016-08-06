@@ -42,6 +42,7 @@ namespace Assets.Scripts.States
                 string[] words = line.Split();
                 mapWidth = Int32.Parse(words[0]);
                 mapHeight = Int32.Parse(words[1]);
+                Grid.lifes = Int32.Parse(words[2]);
 
                 Grid.height = mapHeight;
                 Grid.width = mapWidth;

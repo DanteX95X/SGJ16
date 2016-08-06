@@ -10,6 +10,7 @@ namespace Assets.Scripts.Game
     {
         public static int width = 0;
         public static int height = 0;
+        public static int lifes = 0;
         public static List<List<GameObject>> fields = new List<List<GameObject>>();
 
         public static bool IsOnGrid(Vector3 vector)

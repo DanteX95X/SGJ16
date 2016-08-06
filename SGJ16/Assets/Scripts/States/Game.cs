@@ -22,11 +22,20 @@ namespace Assets.Scripts.States
                 Debug.Log("Level won");
                 ChangeState<CleanUp>();
             }
+            else if (Grid.lifes < 0)
+            {
+                Debug.Log("Level lost");
+                ChangeState<CleanUp>();
+
+            }
+
 
             if (Input.GetKeyDown(KeyCode.Escape) && Grid.isTimeFlowing)
             {
                 ChangeState<Pause>();
+
             }
         }
     }
+
 }

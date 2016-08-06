@@ -26,6 +26,7 @@ namespace Assets.Scripts.Game
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 RewindTime();
+                --Grid.lifes;
             }
 
             if (!Grid.isTimeFlowing)

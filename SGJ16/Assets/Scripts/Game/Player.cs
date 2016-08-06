@@ -17,7 +17,8 @@ namespace Assets.Scripts.Game
 
         void Update()
         {
-            HandleInput();
+            if(!playerMovable.isMoving)
+                HandleInput();
         }
 
         void HandleInput()
@@ -69,7 +70,8 @@ namespace Assets.Scripts.Game
                     {
                         if(enemy.GetComponent<Movable>().position == player.GetComponent<Movable>().position)
                         {
-                            Debug.Log("Time travel!!!");
+                            GetComponent<AudioSource>().Play();
+                            //Debug.Log("Time travel!!!");
                         }
                     }
                 }

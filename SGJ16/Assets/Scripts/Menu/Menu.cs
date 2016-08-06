@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 
 
@@ -35,7 +36,7 @@ public class Menu : MonoBehaviour {
     {
         if(GUI.Button(new Rect(FIRSTBUTTONPOSX, FIRSTBUTTONPOSY, BUTTONWIDTH, BUTTONHEIGHT), "PLAY"))
         {
-            Application.LoadLevel(1);
+            SceneManager.LoadScene(1);
 
         }
 

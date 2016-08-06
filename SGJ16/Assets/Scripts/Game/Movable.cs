@@ -12,6 +12,10 @@ namespace Assets.Scripts.Game
         int lastExecutedMove;
         List<Vector3> positionsThroughTime;
 
+        int speed = 3;
+
+        public bool isMoving = false;
+
         void Start()
         {
             positionsThroughTime = new List<Vector3>();
@@ -24,11 +28,22 @@ namespace Assets.Scripts.Game
         {
             if (position != gameObject.transform.position)
             {
-                gameObject.transform.position = position;
-                ++lastExecutedMove;
+                if (Mathf.Abs(position.x - transform.position.x) + Mathf.Abs(position.y - transform.position.y) < 0.1f)
+                {
+                    isMoving = false;
+                    gameObject.transform.position = position;
 
-                if (!IsExecutingPastMovements())
-                    positionsThroughTime.Add(position);       
+                    if (!IsExecutingPastMovements())
+                    {
+                        ++lastExecutedMove;
+                        positionsThroughTime.Add(position);
+                    }
+                }
+                else
+                {
+                    isMoving = true;
+                    transform.position += (position - transform.position) * Time.deltaTime * speed;
+                }
             }
         }
 
@@ -48,8 +63,10 @@ namespace Assets.Scripts.Game
         {
             if(IsExecutingPastMovements())
             {
-                gameObject.transform.position = positionsThroughTime[++lastExecutedMove];
-                position = gameObject.transform.position;
+                position = positionsThroughTime[++lastExecutedMove];
+                
+                //gameObject.transform.position = position;
+                Debug.Log(position + " " + transform.position);
             }
             else
             {

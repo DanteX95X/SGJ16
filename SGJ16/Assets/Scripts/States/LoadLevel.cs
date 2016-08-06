@@ -73,21 +73,21 @@ namespace Assets.Scripts.States
                         if (words[j] == "C")
                         {
                             newField = Instantiate(clearField, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
-                            newField.AddComponent<Field>();
+                            //newField.AddComponent<Field>();
                             Field component = newField.GetComponent<Field>();
                             component.SetFieldType(Field.FieldType.CLEAR);
                         }
                         else if (words[j] == "L")
                         {
                             newField = Instantiate(slowField, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
-                            newField.AddComponent<Field>();
+                            //newField.AddComponent<Field>();
                             Field component = newField.GetComponent<Field>();
                             component.SetFieldType(Field.FieldType.LOST_TURN);
                         }
                         else if (words[j] == "T")
                         {
                             newField = Instantiate(timeReversalField, new Vector3(j, i, 0), Quaternion.identity) as GameObject;
-                            newField.AddComponent<Field>();
+                            //newField.AddComponent<Field>();
                             Field component = newField.GetComponent<Field>();
                             component.SetFieldType(Field.FieldType.TIME_VORTEX);
                         }

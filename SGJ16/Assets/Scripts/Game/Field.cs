@@ -18,6 +18,9 @@ namespace Assets.Scripts.Game
 
         FieldType type;
 
+        [SerializeField]
+        GameObject effect = null;
+
         public void SetFieldType(FieldType type)
         {
             this.type = type;
@@ -54,6 +57,9 @@ namespace Assets.Scripts.Game
                     player.gameObject.GetComponent<Movable>().ClearPositions();
                     break;
             }
+
+            if(effect != null)
+                Instantiate(effect, new Vector3(transform.position.x, transform.position.y, Grid.depth), transform.rotation);
         }
     }
 }

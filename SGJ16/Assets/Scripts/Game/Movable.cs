@@ -23,6 +23,7 @@ namespace Assets.Scripts.Game
         public int movementPoints;
 
         public bool isMoving = false;
+        public bool canMove = true;
 
         public int MovementPoints
         {
@@ -91,6 +92,7 @@ namespace Assets.Scripts.Game
             lastExecutedMove = 0;
             gameObject.transform.rotation = firstRotation;
             rotation = gameObject.transform.rotation;
+            canMove = true;
 
             ActivateField();
         }
@@ -102,7 +104,10 @@ namespace Assets.Scripts.Game
 
         public void MakeAMove()
         {
-            if (gameObject.tag == "Enemy")
+            if (!canMove)
+                return;
+
+            else if (gameObject.tag == "Enemy")
                 gameObject.GetComponent<Enemy>().UpdatePosition();
             else if(IsExecutingPastMovements())
             {
@@ -157,12 +162,14 @@ namespace Assets.Scripts.Game
         void ActivateField()
         {
             Field field = GetFieldUnderMovable().GetComponent<Field>();
-            field.DoAction(this);
+            if(field != null)
+                field.DoAction(this);
         }
 
         public void ClearPositions()
         {
             positionsThroughTime.Clear();
+            positionsThroughTime.Add(transform.position);
         }
     }
 }

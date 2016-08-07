@@ -49,8 +49,8 @@ namespace Assets.Scripts.Game
             if(playerMovable.position.x < 0 || playerMovable.position.x >= Grid.width || playerMovable.position.y < 0 || playerMovable.position.y >= Grid.height)
             {
                 playerMovable.position = transform.position;
-                Debug.Log("Can't move there sucker");
-                TextRendering.PrintMessage("Can't move there sucker");
+                Debug.Log("Cannot move there");
+                TextRendering.PrintMessage("Cannot move there");
                 return;
             }
 
@@ -70,7 +70,7 @@ namespace Assets.Scripts.Game
                 {
                     foreach(GameObject player in players)
                     {
-                        if(enemy.GetComponent<Movable>().position == player.GetComponent<Movable>().position)
+                        if(enemy.GetComponent<Movable>().position == player.GetComponent<Movable>().position && enemy.GetComponent<Movable>().position != enemy.GetComponent<Enemy>().TargetPosition)
                         {
                             GetComponent<AudioSource>().Play();
                             //Debug.Log("Time travel!!!");

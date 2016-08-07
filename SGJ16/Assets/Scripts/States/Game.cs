@@ -55,7 +55,6 @@ namespace Assets.Scripts.States
             if (Input.GetKeyDown(KeyCode.Escape) && Grid.isTimeFlowing)
             {
                 ChangeState<Pause>();
-
             }
         }
 
@@ -64,6 +63,7 @@ namespace Assets.Scripts.States
             GUIStyle style = new GUIStyle();// = GUIStyle.none;
             style.fontSize = (int)(FONTSIZE);
             style.font = GetComponent<FontsGetter>().font;
+            style.normal.textColor = new Color(1, 0, 0);
 
 
 

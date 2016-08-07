@@ -42,8 +42,12 @@ namespace Assets.Scripts.Game
             switch(type)
             {
                 case FieldType.LOST_TURN:
-                    movable.movementPoints = 0;
-                    TextRendering.PrintMessage("Frozen!!!");
+                    if (movable.tag != "Enemy")
+                    {
+                        movable.movementPoints = 0;
+                        TextRendering.PrintMessage("Frozen!!!");
+                        Instantiate(effect, new Vector3(transform.position.x, transform.position.y, Grid.depth), transform.rotation);
+                    }
                     break;
                 case FieldType.DOUBLE_MOVEMENT:
                     movable.movementPoints = 2;
@@ -58,11 +62,9 @@ namespace Assets.Scripts.Game
                     Player player = FindObjectOfType<Player>();
                     player.gameObject.GetComponent<Movable>().ClearPositions();
                     TextRendering.PrintMessage("Time travel!!!");
+                    Instantiate(effect, new Vector3(transform.position.x, transform.position.y, Grid.depth), transform.rotation);
                     break;
-            }
-
-            if(effect != null)
-                Instantiate(effect, new Vector3(transform.position.x, transform.position.y, Grid.depth), transform.rotation);
+            }   
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Assets.Scripts.Game
     class LevelManager
     {
         public static string levelPath = "Levels\\";
-        public static int currentLevel = 0;
+        public static int currentLevel = 1;
     }
 }

@@ -29,9 +29,9 @@ namespace Assets.Scripts.Game
 
         public static float depth = -0.1f;
 
-        public static void PrintMessage(string message)
+        public static GameObject GetFieldUnderPosition(Vector3 position)
         {
-            
+            return Grid.fields[(int)position.y][(int)position.x];
         }
     }
 }

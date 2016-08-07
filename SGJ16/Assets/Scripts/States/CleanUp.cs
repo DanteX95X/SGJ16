@@ -13,6 +13,7 @@ namespace Assets.Scripts.States
     {
         public override void Init()
         {
+            Grid.isTimeFlowing = false;
         }
 
         public override void UpdateLoop()

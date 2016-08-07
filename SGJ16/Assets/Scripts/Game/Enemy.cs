@@ -41,7 +41,7 @@ namespace Assets.Scripts.Game
 
                 MoveTowardsTarget(neighbours);
 
-                if (enemyMovable.position == targetPosition)
+                if (enemyMovable.position.x == targetPosition.x && enemyMovable.position.y == targetPosition.y)
                 {
                     Grid.isTimeFlowing = false;
                     Debug.Log("You fucked up! Please rewind");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Assets.Scripts.Effects;
 
 namespace Assets.Scripts.Game
 {
@@ -42,6 +43,7 @@ namespace Assets.Scripts.Game
             {
                 case FieldType.LOST_TURN:
                     movable.movementPoints = 0;
+                    TextRendering.PrintMessage("Frozen!!!");
                     break;
                 case FieldType.DOUBLE_MOVEMENT:
                     movable.movementPoints = 2;
@@ -55,6 +57,7 @@ namespace Assets.Scripts.Game
                     }
                     Player player = FindObjectOfType<Player>();
                     player.gameObject.GetComponent<Movable>().ClearPositions();
+                    TextRendering.PrintMessage("Time travel!!!");
                     break;
             }
 

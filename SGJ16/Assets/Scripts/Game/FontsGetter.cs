@@ -4,6 +4,7 @@ using System.Collections;
 public class FontsGetter : MonoBehaviour {
 
     public Font font = null;
+    public Font fontTitle = null;
 
 	// Use this for initialization
 	void Start () {
@@ -18,5 +19,11 @@ public class FontsGetter : MonoBehaviour {
     public Font getFont()
     {
         return font;
-    } 
+    }
+
+    public Font getFontTitle()
+    {
+        return fontTitle;
+    }
+
 }

@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
+using Assets.Scripts.Game;
 
 
 public class Menu : MonoBehaviour {
+
+
+    public Texture[] textures;
 
 
     public float BUTTONWIDTH;
@@ -16,7 +19,8 @@ public class Menu : MonoBehaviour {
     void Start ()
     {
         CheckResolution();
-	}
+        textures = GetComponent<ButtonsTextures>().buttonTextures;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -26,25 +30,30 @@ public class Menu : MonoBehaviour {
 
     void CheckResolution()
     {
-    BUTTONWIDTH = Screen.width / 2;
-    BUTTONHEIGHT = Screen.height / 5;
-    FIRSTBUTTONPOSX = Screen.width / 2 - Screen.width/4; //this is a BUTTONWITH
-    FIRSTBUTTONPOSY = Screen.height / 10;
+        BUTTONWIDTH = Screen.width / 2;
+        BUTTONHEIGHT = Screen.height / 5;
+        FIRSTBUTTONPOSX = Screen.width/2 - BUTTONWIDTH/2; //this is a BUTTONWITH
+        FIRSTBUTTONPOSY = Screen.height / 10;
     }  
 
     public void OnGUI()
     {
-        if(GUI.Button(new Rect(FIRSTBUTTONPOSX, FIRSTBUTTONPOSY, BUTTONWIDTH, BUTTONHEIGHT), "PLAY"))
+
+
+        GUIStyle style = GUIStyle.none;
+        style.alignment = TextAnchor.MiddleCenter;
+
+        if (GUI.Button(new Rect(FIRSTBUTTONPOSX, FIRSTBUTTONPOSY, BUTTONWIDTH, BUTTONHEIGHT), textures[0], style))
         {
             SceneManager.LoadScene(1);
 
         }
-        if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 2*FIRSTBUTTONPOSY + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "CREDITS"))
+        if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 2*FIRSTBUTTONPOSY + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), textures[1], style))
         {
 
         }
 
-        if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 3 * FIRSTBUTTONPOSY + 2*BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "EXIT"))
+        if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 3 * FIRSTBUTTONPOSY + 2*BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), textures[2], style))
         {
             Application.Quit();
         }

@@ -14,11 +14,14 @@ namespace Assets.Scripts.States
         public float FIRSTBUTTONPOSX;
         public float FIRSTBUTTONPOSY;
 
+        public Texture[] textures;
+
         public override void Init()
         {
             Debug.Log("Pause");
             Grid.isTimeFlowing = false;
             CheckResolution();
+            textures = GetComponent<ButtonsTextures>().buttonTextures;
         }
 
         public override void UpdateLoop()
@@ -41,16 +44,20 @@ namespace Assets.Scripts.States
 
         public void OnGUI()
         {
-            if (GUI.Button(new Rect(FIRSTBUTTONPOSX, FIRSTBUTTONPOSY, BUTTONWIDTH, BUTTONHEIGHT), "RESUME"))
+
+            GUIStyle style = GUIStyle.none;
+            style.alignment = TextAnchor.MiddleCenter;
+
+            if (GUI.Button(new Rect(FIRSTBUTTONPOSX, FIRSTBUTTONPOSY, BUTTONWIDTH, BUTTONHEIGHT), textures[0], style))
             {
                 ChangeState<Game>();
             }
-            if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 2 * FIRSTBUTTONPOSY + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "RESTART"))
+            if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 2 * FIRSTBUTTONPOSY + BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), textures[1], style))
             {
                 SceneManager.LoadScene(1);
               
             }
-            if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 3 * FIRSTBUTTONPOSY + 2 * BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), "QUIT"))
+            if (GUI.Button(new Rect(FIRSTBUTTONPOSX, 3 * FIRSTBUTTONPOSY + 2 * BUTTONHEIGHT, BUTTONWIDTH, BUTTONHEIGHT), textures[2], style))
             {
                 SceneManager.LoadScene(0);
             }

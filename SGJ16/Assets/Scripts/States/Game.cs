@@ -66,6 +66,7 @@ namespace Assets.Scripts.States
             style.font = GetComponent<FontsGetter>().font;
 
 
+
             GUI.Label(new Rect((float)FIRSTLABELPOSX, (float)FIRSTLABELPOSY, 100, 20), "Level: " + (LevelManager.currentLevel + 1), style);
 
             GUI.Label(new Rect((float)FIRSTLABELPOSX, 1.2f*(float)FIRSTLABELPOSY + (float)FONTSIZE, 100, 20), "Lifes: " + (Grid.lifes + 1), style);

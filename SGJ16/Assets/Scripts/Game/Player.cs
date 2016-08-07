@@ -59,8 +59,7 @@ namespace Assets.Scripts.Game
                 Movable[] movables = FindObjectsOfType<Movable>();
                 foreach (Movable movable in movables)
                 {
-                    //Field movableField = movable.GetFieldUnderMovable().GetComponent<Field>();
-                    //movableField.DoAction(movable);
+
                     movable.MakeAMove();
                     movable.position.x = Mathf.Round(movable.position.x);
                     movable.position.y = Mathf.Round(movable.position.y);

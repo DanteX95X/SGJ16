@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Effects;
 
 namespace Assets.Scripts.Game
 {
@@ -44,6 +45,7 @@ namespace Assets.Scripts.Game
                 {
                     Grid.isTimeFlowing = false;
                     Debug.Log("You fucked up! Please rewind");
+                    TextRendering.PrintMessage("You fucked up!\n Press spacebar to send your zombie clone back in time", 3);
                 }
             }
 
@@ -82,7 +84,6 @@ namespace Assets.Scripts.Game
                         {
                             if (player.transform.position == possiblePosition)
                             {
-                                //Debug.Log("Not safe " + possiblePosition);
                                 isPositionSafe = false;
                             }
                         }
@@ -91,7 +92,6 @@ namespace Assets.Scripts.Game
                             allowedMovements.Add(possiblePosition);
                     }
                 }
-                //Debug.Log(allowedMovements.Count);
             }
 
             int index = Random.Range(0, allowedMovements.Count);

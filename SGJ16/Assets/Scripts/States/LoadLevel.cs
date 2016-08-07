@@ -138,10 +138,12 @@ namespace Assets.Scripts.States
                     if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight)
                         Debug.Log("Congrats! You're an idiot. Place enemy's target on a grid.");
                     newEnemy.GetComponent<Enemy>().TargetPosition = new Vector3(x, y, Grid.depth);
+                    Grid.GetFieldUnderPosition(newEnemy.GetComponent<Enemy>().TargetPosition).GetComponent<Renderer>().material.color = new Color(0, 0, 0.8f, 0.2f);
                 }
             }
 
             GameObject.FindObjectOfType<Camera>().gameObject.AddComponent<CameraMovement>();
+            FindObjectOfType<TextMesh>().transform.position = new Vector3(Grid.width / 2.0f, Grid.height / 2.0f, -1);
             ChangeState<Game>();
         }
 

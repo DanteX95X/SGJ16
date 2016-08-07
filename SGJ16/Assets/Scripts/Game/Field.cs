@@ -42,7 +42,6 @@ namespace Assets.Scripts.Game
             {
                 case FieldType.LOST_TURN:
                     movable.movementPoints = 0;
-                    //Debug.Log(movable.movementPoints);
                     break;
                 case FieldType.DOUBLE_MOVEMENT:
                     movable.movementPoints = 2;
@@ -52,6 +51,7 @@ namespace Assets.Scripts.Game
                     foreach(Movable movableObject in movables)
                     {
                         movableObject.ResetPosition();
+                        movableObject.isMoving = false;
                     }
                     Player player = FindObjectOfType<Player>();
                     player.gameObject.GetComponent<Movable>().ClearPositions();

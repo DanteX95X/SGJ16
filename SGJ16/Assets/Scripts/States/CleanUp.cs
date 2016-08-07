@@ -18,15 +18,17 @@ namespace Assets.Scripts.States
 
         public override void UpdateLoop()
         {
-            TextRendering.PrintMessage("Level lost!\nPress spacebar to return to main menu.");
-            if (Input.GetKeyDown(KeyCode.Space))
+            TextRendering.PrintMessage("Level lost!\nPress Y to restart level.\nPress N to return to main menu.");
+            if (Input.GetKeyDown(KeyCode.N))
             {
                 Grid.fields = null;
                 MonoBehaviour[] allObjects = FindObjectsOfType<MonoBehaviour>();
                 foreach (MonoBehaviour obj in allObjects)
                     Destroy(obj);
                 SceneManager.LoadScene(0);
-            }   
+            }
+            if (Input.GetKeyDown(KeyCode.Y))
+                SceneManager.LoadScene(1);
         }
     }
 }

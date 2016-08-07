@@ -44,8 +44,8 @@ namespace Assets.Scripts.Game
                 if (enemyMovable.position.x == targetPosition.x && enemyMovable.position.y == targetPosition.y)
                 {
                     Grid.isTimeFlowing = false;
-                    Debug.Log("You fucked up! Please rewind");
-                    TextRendering.PrintMessage("You fucked up!\n Press spacebar to send your zombie clone back in time", 3);
+                    Debug.Log("Fly has fled!\n Press spacebar to send your zombie clone back in time.");
+                    TextRendering.PrintMessage("Fly has fled!\n Press spacebar to send your zombie clone back in time.", 3);
                 }
             }
 

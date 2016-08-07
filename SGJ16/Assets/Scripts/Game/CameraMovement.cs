@@ -21,38 +21,32 @@ namespace Assets.Scripts.Game
         public void Update()
         {
 
-            /*if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
-                velocity.x += -speed;
-            else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
-                velocity.x += speed;
+            if (Input.GetKey(KeyCode.LeftArrow))
+                transform.position += new Vector3(-speed, 0) * Time.deltaTime;
+            if (Input.GetKey(KeyCode.RightArrow))
+                transform.position += new Vector3(speed, 0) * Time.deltaTime;
+            if (Input.GetKey(KeyCode.DownArrow))
+                transform.position += new Vector3(0, -speed) * Time.deltaTime;
+            if (Input.GetKey(KeyCode.UpArrow))
+                transform.position += new Vector3(0, speed) * Time.deltaTime;
+            if (Input.GetKey(KeyCode.KeypadMinus))
+                transform.position += new Vector3(0, 0, -speed) * Time.deltaTime;
+            if (Input.GetKey(KeyCode.KeypadPlus))
+                transform.position += new Vector3(0, 0, speed) * Time.deltaTime;
 
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
-                velocity.y += speed;
-            else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.UpArrow))
-                velocity.y += -speed;
-
-            transform.position += velocity * Time.deltaTime;
-            */
-            /*if (transform.position.x < 0)
-            {
+            
+            if (transform.position.x < 0)
                 transform.position = new Vector3(0, transform.position.y, transform.position.z);
-                velocity = new Vector3(0, 0, 0);
-            }
             else if (transform.position.x > Grid.width)
-            { 
                 transform.position = new Vector3(Grid.width, transform.position.y, transform.position.z);
-                velocity = new Vector3(0, 0, 0);
-            }
             if (transform.position.y < 0)
-            {
                 transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                velocity = new Vector3(0, 0, 0);
-            }
             else if (transform.position.y > Grid.height)
-            {
                 transform.position = new Vector3(transform.position.x, Grid.height, transform.position.z);
-                velocity = new Vector3(0, 0, 0);
-            }*/
+            if (transform.position.z > -1)
+                transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+            else if (transform.position.z < -20)
+                transform.position = new Vector3(transform.position.x, transform.position.y, -20);
 
         }
     }

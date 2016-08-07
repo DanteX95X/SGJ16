@@ -6,6 +6,7 @@ using UnityEngine;
 using Assets.Scripts.Game;
 using System.IO;
 using UnityEngine.SceneManagement;
+using Assets.Scripts.Effects;
 
 namespace Assets.Scripts.States
 {

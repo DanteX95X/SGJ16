@@ -69,6 +69,10 @@ namespace Assets.Scripts.Game
                     isMoving = false;
                     gameObject.transform.position = position;
 
+                    position.x = Mathf.Round(position.x);
+                    position.y = Mathf.Round(position.y);
+                    transform.position = position;
+
                     ActivateField();
 
                     if (!IsExecutingPastMovements())

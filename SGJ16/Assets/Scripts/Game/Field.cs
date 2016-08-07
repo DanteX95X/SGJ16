@@ -47,6 +47,7 @@ namespace Assets.Scripts.Game
                         movable.movementPoints = 0;
                         TextRendering.PrintMessage("Frozen!!!");
                         Instantiate(effect, new Vector3(transform.position.x, transform.position.y, Grid.depth), transform.rotation);
+                        GetComponent<AudioSource>().Play();
                     }
                     break;
                 case FieldType.DOUBLE_MOVEMENT:
@@ -63,6 +64,7 @@ namespace Assets.Scripts.Game
                     player.gameObject.GetComponent<Movable>().ClearPositions();
                     TextRendering.PrintMessage("Time travel!!!");
                     Instantiate(effect, new Vector3(transform.position.x, transform.position.y, Grid.depth), transform.rotation);
+                    GetComponent<AudioSource>().Play();
                     break;
             }   
         }

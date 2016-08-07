@@ -62,6 +62,9 @@ namespace Assets.Scripts.Game
                     //Field movableField = movable.GetFieldUnderMovable().GetComponent<Field>();
                     //movableField.DoAction(movable);
                     movable.MakeAMove();
+                    movable.position.x = Mathf.Round(movable.position.x);
+                    movable.position.y = Mathf.Round(movable.position.y);
+                    movable.transform.position = movable.position;
                 }
 
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");

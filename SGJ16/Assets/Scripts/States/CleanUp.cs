@@ -5,6 +5,7 @@ using System.Text;
 using Assets.Scripts.Game;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using Assets.Scripts.Effects;
 
 namespace Assets.Scripts.States
 {
@@ -12,14 +13,12 @@ namespace Assets.Scripts.States
     {
         public override void Init()
         {
-            //Grid.fields = null;
-            //ChangeState<DummyState>();
-            //SceneManager.LoadScene(0);
         }
 
         public override void UpdateLoop()
         {
-            if(Input.anyKeyDown)
+            TextRendering.PrintMessage("Level lost!\nPress spacebar to return to main menu.");
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 Grid.fields = null;
                 MonoBehaviour[] allObjects = FindObjectsOfType<MonoBehaviour>();

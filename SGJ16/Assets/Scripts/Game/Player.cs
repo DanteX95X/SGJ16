@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.States;
+using Assets.Scripts.Effects;
 
 namespace Assets.Scripts.Game
 {
@@ -48,6 +50,7 @@ namespace Assets.Scripts.Game
             {
                 playerMovable.position = transform.position;
                 Debug.Log("Can't move there sucker");
+                TextRendering.PrintMessage("Can't move there sucker");
                 return;
             }
 

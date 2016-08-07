@@ -42,7 +42,6 @@ namespace Assets.Scripts.Game
             {
                 case FieldType.LOST_TURN:
                     movable.movementPoints = 0;
-                    //Debug.Log(movable.movementPoints);
                     break;
                 case FieldType.DOUBLE_MOVEMENT:
                     movable.movementPoints = 2;

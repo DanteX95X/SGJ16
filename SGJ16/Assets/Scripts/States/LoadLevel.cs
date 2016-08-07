@@ -142,6 +142,7 @@ namespace Assets.Scripts.States
             }
 
             GameObject.FindObjectOfType<Camera>().gameObject.AddComponent<CameraMovement>();
+            FindObjectOfType<TextMesh>().transform.position = new Vector3(Grid.width / 2.0f, Grid.height / 2.0f, -1);
             ChangeState<Game>();
         }
 

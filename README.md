@@ -1,6 +1,6 @@
 # SGJ16
 
-Puzzle game featuring clones horde and time travelling.
+Puzzle game featuring spawning zombie clones and time travel.
 
 Link to build:
 
